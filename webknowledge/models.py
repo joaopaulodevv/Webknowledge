@@ -7,7 +7,7 @@ class Usuariosite(models.Model):
     email = models.EmailField()
     cpf = models.CharField(max_length=11)
     datadenascimento = models.DateField()
-    nota = models.FloatField(max_length=3)
+    nota = models.FloatField()
     nome = models.CharField(max_length=100)
 
     def avaliarusuario(self, idusuario):
@@ -17,8 +17,12 @@ class Usuariosite(models.Model):
 
 
 
-class Aluno(Usuariosite):
-
+class Aluno(models.Model):
+    usuario = models.OneToOneField(
+        Usuariosite,
+        on_delete=models.CASCADE,
+        primary_key=True,
+    )
     qtdaulasassistidas = models.IntegerField()
 
     def agendaraula(self, professor):
@@ -26,11 +30,15 @@ class Aluno(Usuariosite):
         pass
 
     def __str__(self):
-        return f'{self.nome} ({self.idaluno})'
+        return f'{self.usuario.nome} ({self.idaluno})'
 
 
 class Professor(models.Model):
-    
+    usuario = models.OneToOneField(
+        Usuariosite,
+        on_delete=models.CASCADE,
+        primary_key=True,
+    )
 
     qtdaulasfeitas = models.IntegerField()
     disciplina = models.CharField(max_length=40)
@@ -45,17 +53,15 @@ class Professor(models.Model):
         pass
 
     def __str__(self):
-        return f'Professor {self.idProfessor} - Especialidade: {self.especialidade}'
+        return f'Professor {self.usuario.nome} - Especialidade: {self.especialidade}'
 
 
 class Aula(models.Model):
-    idAula = models.IntegerField()
     dataAula = models.DateField()
     professor = models.ForeignKey(Professor, on_delete=models.CASCADE)
     
-
     def __str__(self):
-        return f'Aula {self.idAula} - {self.dataAula}'
+        return f'Aula {self.professor} - {self.dataAula}'
 
 
 class Avaliacao(models.Model):  
@@ -69,5 +75,4 @@ class Avaliacao(models.Model):
         pass
 
     def __str__(self):
-        return f'Avaliacao {self.idAvaliacao} - Nota: {self.nota}'
-
+        return f'Avaliacao {self.id} - Nota: {self.nota}'
