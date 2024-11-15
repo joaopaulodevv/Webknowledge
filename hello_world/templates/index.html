@@ -14,27 +14,33 @@
 </head>
 
 <body>
-    <div class = "sobrenos">
-        <a href="sobrenos/">Sobre Nós</a>
+    <div class="sobrenos">
+        <a href="{% url 'sobrenos' %}">Sobre Nós</a>
     </div>
-
-
-
-
 
     <div class="container">
         <div class="logo">
             <h1>Webknowledge</h1>
-            <img src="static/icone2.png" alt="Logo">
+            <img src="{% static 'icone2.png' %}" alt="Logo">
         </div>
+
         <div class="login-box">
-            <form action="#">
-                <input type="email" placeholder="Seu nome de usuario" required>
-                <input type="password" placeholder="Insira sua senha" required>
+            <form method="POST">
+                {% csrf_token %}
+                <div class="form-group">
+                    {{ formulario.username.label_tag }} 
+                    {{ formulario.username }}
+                </div>
+                <div class="form-group">
+                    {{ formulario.password.label_tag }}
+                    {{ formulario.password }}
+                </div>
                 <button type="submit">Entrar</button>
             </form>
-            <a href="cadastro/">Ainda não tem uma conta?</a>
+
+            <a href="{% url 'cadastro' %}">Ainda não tem uma conta?</a>
         </div>
     </div>
 </body>
+
 </html>

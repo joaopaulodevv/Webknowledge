@@ -1,11 +1,8 @@
+
 body {
-  
   background-image: url("{% static 'pattern.png' %}");
-    
   background-size: auto;
   background-repeat: repeat;
-  
-
   font-family: Arial, sans-serif;
   background-color: #708090;
   display: flex;
@@ -15,16 +12,32 @@ body {
   margin: 0;
 }
 
+
 .container {
   text-align: center;
   color: white;
 }
+
 
 h1 {
   font-size: 3em;
   margin: 0;
   font-family: Georgia, serif;
 }
+
+.logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.logo img {
+  width: 30px;
+  height: 30px;
+  margin-left: 5px;
+}
+
 
 .login-box {
   background-color: white;
@@ -35,10 +48,11 @@ h1 {
   margin: 20px auto;
 }
 
-.login-box input[type="email"],
+
+.login-box input[type="text"],
 .login-box input[type="password"] {
   width: 80%;
-  padding: 20px;
+  padding: 15px;
   margin: 10px 0;
   border: 1px solid #ddd;
   border-radius: 5px;
@@ -60,37 +74,16 @@ h1 {
   background-color: #555;
 }
 
+
 .login-box a {
   display: block;
-  margin-top: 10px;
-  font-size: 0.9em;
-  color: #333;
-  text-decoration: none;
-}
-
-.login-box a:hover {
-  text-decoration: underline;
-}
-
-.logo {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: 20px;
-}
-
-.logo img {
-  width: 30px;
-  height: 30px;
-  margin-left: 5px;
 }
 
 .sobrenos{
-  
-    position: absolute; 
-    top: 10px;            
-    right: 10px;          
-  
-  color : #fff;
 
+  position: absolute;   
+    top: 0;               
+    right: 0;             
+    margin: 10px;        
 }
+

@@ -1,5 +1,6 @@
-{% load django_browser_reload %}
+
 {% load static %}
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -16,7 +17,7 @@
         <nav>
             <a href="#">Home</a>
             <a href="#">Minha Conta</a>
-            <a href="/">Sair</a>
+            <a href="/logout/" {% csrf_token %} Sair</a>
         </nav>
     </header>
     <main>
@@ -25,30 +26,32 @@
         
         <div class="templates">
             <div class="template">
-                <img src={% static 'sandrocurio.jpg' %} alt="Professor 1">
-                <h3>Professor João Silva</h3>
-                <p>Especialista em Matemática</p>
-                <button>Ver Aulas</button>
-            </div>
-            <div class="template">
-                <img src={% static 'sandrocurio.jpg' %} alt="Professor 2">
-                <h3>Professora Maria Santos</h3>
-                <p>Especialista em Física</p>
-                <button>Ver Aulas</button>
-            </div>
-            <div class="template">
-                <img src={% static 'sandrocurio.jpg' %} alt="Professor 3">
-                <h3>Professor Sandro curio</h3>
-                <p>Especialista em Química</p>
-                <button>Ver Aulas</button>
-            </div>
-            <div class="template">
-                <img src={% static 'sandrocurio.jpg' %} alt="Professor 4">
-                <h3>Sandro Curio</h3>
-                <p>Especialista em Biologia</p>
-                <button>Ver Aulas</button>
+             {% for professor in professores %}
+
+            {professor.imagem}
+
+
+
+
+
+
+
+
+
+             {% endfor %}
             </div>
         </div>
     </main>
+
+
+
+  
+
+
+
 </body>
+
+
+
+
 </html>
