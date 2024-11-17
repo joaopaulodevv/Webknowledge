@@ -3,13 +3,18 @@ from django.contrib.auth.models import User
 
 
 class Usuariosite(models.Model):
-    idusuario =  models.IntegerField()
+
+    usuario = models.OneToOneField(User, on_delete=models.CASCADE)
     email = models.EmailField()
     cpf = models.CharField(max_length=11)
     datadenascimento = models.DateField()
     nota = models.FloatField()
     nome = models.CharField(max_length=100)
-
+    TIPO_CONTA = (
+        ('professor', 'Professor'),
+        ('aluno', 'Aluno'),
+    )
+    tipo_conta = models.CharField(max_length=20, choices=TIPO_CONTA, default='aluno')
     def avaliarusuario(self, idusuario):
       
         pass

@@ -12,7 +12,6 @@
     <meta name="generator" content="GitHub Codespaces">
     <meta name="theme-color" content="#000000">
     <title>{% block title %}Cadastro | Webknowledge{% endblock %}</title>
-    
 
     <link rel="stylesheet" href="{% static 'cadastro.css' %}">
 </head>
@@ -26,11 +25,10 @@
             Webknowledge <span><img src="{% static 'icone2.png' %}" alt="icon" width="40"></span>
         </div>
         <div class="login-box">
-            <form action="#">
-                <input type="text" placeholder="Nome completo" required>
-                <input type="email" placeholder="xxxxx@xxxxx.com" required>
-                <input type="password" placeholder="Insira sua senha" required>
-                <input type="password" placeholder="Confirme sua senha" required>
+           
+            <form method="post" action=".">
+                {% csrf_token %}
+                {{ form }}
                 <button type="submit">Cadastrar</button>
             </form>
             <a href="/">Já tem uma conta? Entre aqui.</a>
@@ -38,7 +36,6 @@
     </div>
 
     <div class="icons">
-        
         <a href="/sobrenos/">Sobre nós</a>
     </div>
 
