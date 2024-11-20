@@ -8,7 +8,7 @@ class EditarPerfilForm(forms.ModelForm):
     class Meta():
         model = Usuariosite
         fields = ['nome', 'email', 'cpf', 'datadenascimento',
-    "tipo_conta"]
+    "tipo_conta","perfil_imagem"]
 
 class NovoUsuarioForm(UserCreationForm):
     email = forms.EmailField()

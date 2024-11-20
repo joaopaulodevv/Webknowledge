@@ -25,21 +25,24 @@
         <p>Escolha um dos templates de professores para começar o seu aprendizado:</p>
         
         <div class="templates">
-            <div class="template">
-             {% for professor in professores %}
-
-            {professor.imagem}
-
-
-
-
-
-
-
-
-
-             {% endfor %}
+            {% if usuarios %}
+            <div class="templates">
+                {% for usuario in usuarios %}
+                    <div class="template">
+                        <p>{{ usuario.nome }}</p>
+                        {% if usuario.perfil_imagem %}
+                                <p><img src="{{ usuario.perfil_imagem.url }}" class="icone" alt="Imagem de perfil"></p>
+                            {% else %}
+                                <p><img src="{% static 'usuariosemfoto.jpg' %}" class="icone" alt="Imagem de perfil padrão"></p>
+                            {% endif %}
+                    </div>
+                {% endfor %}
             </div>
+        {% else %}
+            <p>Nenhum professor encontrado.</p>
+        {% endif %}
+            
+            
         </div>
     </main>
 

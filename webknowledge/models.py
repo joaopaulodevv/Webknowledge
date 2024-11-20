@@ -5,6 +5,7 @@ from django.contrib.auth.models import User
 class Usuariosite(models.Model):
 
     usuario = models.OneToOneField(User, on_delete=models.CASCADE)
+    perfil_imagem = models.ImageField(upload_to='perfil_images/', null=True, blank=True)
     email = models.EmailField()
     cpf = models.CharField(max_length=11)
     datadenascimento = models.DateField()

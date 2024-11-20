@@ -18,24 +18,20 @@ def index(request):
 
 
 def cadastro(request):
-    if request.method == 'POST':
-        user_form = NovoUsuarioForm(request.POST)
-        usuariosite_form = UsuariositeForm(request.POST)
-        
-        if user_form.is_valid() and usuariosite_form.is_valid():
-           
-            user = user_form.save() 
-            usuariosite = usuariosite_form.save(commit=False) 
-            usuariosite.usuario = user  
-            usuariosite.nome = user.username  
-            usuariosite.nota = 5.0
-            usuariosite.email = user.email 
-            usuariosite.save()  
+    user_form = NovoUsuarioForm(request.POST)
+    usuariosite_form = UsuariositeForm(request.POST)
+    
+    if user_form.is_valid() and usuariosite_form.is_valid():
+        user = user_form.save()  
+        usuariosite = usuariosite_form.save(commit=False)  
+        usuariosite.usuario = user  
+        usuariosite.nome = user.username
+        usuariosite.nota = 5.0  
+        usuariosite.email = user.email
+        usuariosite.save()  
 
-            login(request, user)
-            return redirect('/minhacontaprofessor/')  
-        user_form = NovoUsuarioForm()
-        usuariosite_form = UsuariositeForm()
+        login(request, user)  
+        return redirect('/minhaconta/')  
 
     return render(request, 'cadastro.html', {
         'form': user_form,
@@ -44,15 +40,17 @@ def cadastro(request):
 
 
 
-    return render(request,"cadastro.html")
-
-
 def sobrenos(request):
     return render(request,"sobrenos.html")
 
 @login_required
 def homealuno(request):
-    return render(request,"homealuno.html")
+
+    usuarios  = Usuariosite.objects.filter(tipo_conta="professor")
+
+   
+
+    return render(request,"homealuno.html",{"usuarios": usuarios})
 
 
 @login_required
