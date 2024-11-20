@@ -29,8 +29,8 @@ urlpatterns = [
     path("cadastro/",views.cadastro, name="cadastro"),
     path("sobrenos/",views.sobrenos, name="sobrenos"),
     path("homealuno/",views.homealuno),
-    path("logout/",views.logout_usuario, name="logout_usuario")
-
+    path("logout/",views.logout_usuario, name="logout_usuario"),
+    path("minhaconta/",views.editar_perfil_prof)
 
 ]
 if settings.DEBUG:
