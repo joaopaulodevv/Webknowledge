@@ -7,7 +7,7 @@ class EditarPerfilForm(forms.ModelForm):
            
     class Meta():
         model = Usuariosite
-        fields = ['nome', 'email', 'cpf', 'datadenascimento',"nome",
+        fields = ['nome', 'email', 'cpf', 'datadenascimento',
     "tipo_conta"]
 
 class NovoUsuarioForm(UserCreationForm):
@@ -16,3 +16,8 @@ class NovoUsuarioForm(UserCreationForm):
     class Meta:
         model = User
         fields = ['username',"nome", 'email','password1', 'password2']
+
+class UsuariositeForm(forms.ModelForm):
+    class Meta:
+        model = Usuariosite
+        fields = ['cpf', 'datadenascimento',"tipo_conta"]

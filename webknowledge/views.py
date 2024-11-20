@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import login, logout 
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import AuthenticationForm
-from .forms import EditarPerfilForm, NovoUsuarioForm
+from .forms import EditarPerfilForm, NovoUsuarioForm, UsuariositeForm
 from .models import Usuariosite
 
 def index(request):
@@ -17,25 +17,30 @@ def index(request):
 
 
 
-
-
-
-
 def cadastro(request):
-    formulario = NovoUsuarioForm()
-    if request.method == 'POST' and request.POST:
-        formulario = NovoUsuarioForm(request.POST)
-        if formulario.is_valid():
-            novo_usuario = formulario.save(commit=False)
-            novo_usuario.email = formulario.cleaned_data['email']
-            novo_usuario.nome = formulario.cleaned_data["nome"]
-            novo_usuario.save()
-            return redirect('/login')
-    return render(
-request, 'cadastro.html',
-{'formulario': formulario}
-)
+    if request.method == 'POST':
+        user_form = NovoUsuarioForm(request.POST)
+        usuariosite_form = UsuariositeForm(request.POST)
+        
+        if user_form.is_valid() and usuariosite_form.is_valid():
+           
+            user = user_form.save() 
+            usuariosite = usuariosite_form.save(commit=False) 
+            usuariosite.usuario = user  
+            usuariosite.nome = user.username  
+            usuariosite.nota = 5.0
+            usuariosite.email = user.email 
+            usuariosite.save()  
 
+            login(request, user)
+            return redirect('/minhacontaprofessor/')  
+        user_form = NovoUsuarioForm()
+        usuariosite_form = UsuariositeForm()
+
+    return render(request, 'cadastro.html', {
+        'form': user_form,
+        'form2': usuariosite_form,
+    })
 
 
 

@@ -26,9 +26,10 @@
         </div>
         <div class="login-box">
            
-            <form method="post" action=".">
+            <form method="post">
                 {% csrf_token %}
-                {{ form }}
+                {{form}}
+                {{form2}}
                 <button type="submit">Cadastrar</button>
             </form>
             <a href="/">Já tem uma conta? Entre aqui.</a>
