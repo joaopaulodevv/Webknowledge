@@ -47,10 +47,10 @@ def sobrenos(request):
 def homealuno(request):
 
     usuarios  = Usuariosite.objects.filter(tipo_conta="professor")
-
+    meuusuario = request.user.usuariosite
    
 
-    return render(request,"homealuno.html",{"usuarios": usuarios})
+    return render(request,"homealuno.html",{"usuarios": usuarios, "meuuser":meuusuario})
 
 
 @login_required
