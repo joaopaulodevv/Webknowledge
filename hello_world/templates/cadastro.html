@@ -2,7 +2,7 @@
 {% load static %}
 
 <!doctype html>
-<html lang="en">
+<html lang="pt-BR">
 
 <head>
     <meta charset="utf-8">
@@ -22,22 +22,35 @@
 
     <div class="login-container">
         <div class="brand-logo">
-            Webknowledge <span><img src="{% static 'icone2.png' %}" alt="icon" width="40"></span>
+            Webknowledge <span><img src="{% static 'icone2.png' %}" alt="Ícone Webknowledge" width="40"></span>
         </div>
+
         <div class="login-box">
-           
-            <form method="post">
+            <h2>Cadastro</h2>
+            <form method="post" aria-labelledby="form-title">
                 {% csrf_token %}
-                {{form}}
-                {{form2}}
-                <button type="submit">Cadastrar</button>
+                
+                <div class="form-group">
+                    <label for="id_username" class="form-label">Username:</label>
+                    {{ form.username }}
+                </div>
+                
+                <div class="form-group">
+                    <label for="id_password" class="form-label">Password:</label>
+                    {{ form.password }}
+                </div>
+
+                {{ form2 }}
+                
+                <button type="submit" aria-label="Cadastrar conta">Cadastrar</button>
             </form>
-            <a href="/">Já tem uma conta? Entre aqui.</a>
+
+            <p><a href="/" aria-label="Ir para login">Já tem uma conta? Entre aqui.</a></p>
         </div>
     </div>
 
     <div class="icons">
-        <a href="/sobrenos/">Sobre nós</a>
+        <a href="/sobrenos/" aria-label="Saiba mais sobre nós">Sobre nós</a>
     </div>
 
 </body>
