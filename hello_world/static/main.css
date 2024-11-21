@@ -86,3 +86,41 @@ h1 {
     margin: 10px;        
 }
 
+/* Estilizando os campos de entrada */
+.form-group label {
+  color: #000000; /* Definindo a cor preta para o texto dos labels */
+}
+
+.form-group input {
+  color: #000000; /* Definindo a cor preta para o texto dentro do campo */
+  border: 1px solid #ccc; /* Cor do borda do campo */
+  padding: 10px;
+  width: 100%;
+  box-sizing: border-box;
+  border-radius: 5px;
+}
+
+button {
+  background-color: #333;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  width: 100%;
+}
+
+button:hover {
+  background-color: #444;
+}
+
+a {
+  display: block;
+  margin-top: 15px;
+  color: #333;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}

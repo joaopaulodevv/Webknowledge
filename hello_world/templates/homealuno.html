@@ -1,61 +1,47 @@
-
 {% load static %}
 
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Webknowledge - Professores</title>
     <link rel="stylesheet" href="{% static 'homealuno.css' %}">
-
 </head>
 <body>
     <header>
-        <h1>Webknowledge <img src={% static 'icone2.png' %} alt="logo" width="30"></h1>
+        <h1>Webknowledge <img src="{% static 'icone2.png' %}" alt="logo" width="30"></h1>
         <nav>
             <a href="#">Home</a>
             <a href="/minhaconta/">Minha Conta</a>
-            <a href="/logout/" {% csrf_token %} Sair</a>
+            <a href="/logout/">Sair</a>
         </nav>
     </header>
     <main>
-        <h2>Bem-vindo, Aluno!</h2>
-        <p>Escolha um dos templates de professores para começar o seu aprendizado:</p>
-        
-        <div class="templates">
-            {% if usuarios %}
+        <div class="container">
+            <h2>Bem-vindo, Aluno!</h2>
+            <p>Escolha um dos templates de professores para começar o seu aprendizado:</p>
+
             <div class="templates">
-                {% for usuario in usuarios %}
-                    <div class="template">
-                       
-                        {% if usuario.perfil_imagem %}
-                                <p><img src="{{ usuario.perfil_imagem.url }}" class="icone" alt="Imagem de perfil"></p>
-                            {% else %}
-                                <p><img src="{% static 'usuariosemfoto.jpg' %}" class="icone" alt="Imagem de perfil padrão"></p>
-                            {% endif %}
-                            <p>{{ usuario.nome }}</p>
-                    </div>
-                {% endfor %}
+                {% if usuarios %}
+                    {% for usuario in usuarios %}
+                        <div class="template">
+                            <div class="template-img">
+                                {% if usuario.perfil_imagem %}
+                                    <img src="{{ usuario.perfil_imagem.url }}" class="icone" alt="Imagem de perfil">
+                                {% else %}
+                                    <img src="{% static 'usuariosemfoto.jpg' %}" class="icone" alt="Imagem de perfil padrão">
+                                {% endif %}
+                            </div>
+                            <p class="nome">{{ usuario.nome }}</p>
+                            <button>Ver perfil</button>
+                        </div>
+                    {% endfor %}
+                {% else %}
+                    <p>Nenhum professor encontrado.</p>
+                {% endif %}
             </div>
-        {% else %}
-            <p>Nenhum professor encontrado.</p>
-        {% endif %}
-            
-            
         </div>
     </main>
-
-
-
-  
-
-
-
 </body>
-
-
-
-
 </html>
