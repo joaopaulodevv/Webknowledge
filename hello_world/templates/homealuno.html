@@ -29,12 +29,13 @@
             <div class="templates">
                 {% for usuario in usuarios %}
                     <div class="template">
-                        <p>{{ usuario.nome }}</p>
+                       
                         {% if usuario.perfil_imagem %}
                                 <p><img src="{{ usuario.perfil_imagem.url }}" class="icone" alt="Imagem de perfil"></p>
                             {% else %}
                                 <p><img src="{% static 'usuariosemfoto.jpg' %}" class="icone" alt="Imagem de perfil padrão"></p>
                             {% endif %}
+                            <p>{{ usuario.nome }}</p>
                     </div>
                 {% endfor %}
             </div>

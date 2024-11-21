@@ -64,7 +64,7 @@ def logout_usuario(request):
 def editar_perfil_prof(request):
     usuario = request.user.usuariosite
     if request.method == 'POST':
-        form = EditarPerfilForm(request.POST, instance=usuario)
+        form = EditarPerfilForm(request.POST, request.FILES, instance=usuario)
         if form.is_valid():
             form.save()
             
