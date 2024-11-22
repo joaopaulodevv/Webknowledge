@@ -30,7 +30,8 @@ urlpatterns = [
     path("sobrenos/",views.sobrenos, name="sobrenos"),
     path("homealuno/",views.homealuno),
     path("logout/",views.logout_usuario, name="logout_usuario"),
-    path("minhaconta/",views.editar_perfil_prof)
+    path("minhaconta/",views.editar_perfil_prof),
+    path("professor/",views.professor),
 
 ]
 if settings.DEBUG:

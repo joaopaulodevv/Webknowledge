@@ -73,3 +73,7 @@ def editar_perfil_prof(request):
         form = EditarPerfilForm(instance=usuario)
     
     return render(request, 'minhacontaprofessor.html', {'form': form})
+
+
+def professor(request):
+    return render(request,"professores.html")
