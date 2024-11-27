@@ -31,7 +31,11 @@ urlpatterns = [
     path("homealuno/",views.homealuno),
     path("logout/",views.logout_usuario, name="logout_usuario"),
     path("minhaconta/",views.editar_perfil_prof),
+<<<<<<< HEAD
     path("professor/<int:iduser>",views.professor),
+=======
+    path("professor/",views.professor),
+>>>>>>> 95d88450172e9e6b6547347706a234d504ddba0f
 
 ]
 if settings.DEBUG:

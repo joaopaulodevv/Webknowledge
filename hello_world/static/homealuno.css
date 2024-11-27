@@ -26,6 +26,10 @@ header h1 {
     margin-bottom: 10px;
 }
 
+header img {
+    vertical-align: middle;
+}
+
 nav a {
     color: #fff;
     text-decoration: none;
@@ -70,20 +74,16 @@ main p {
     text-align: center;
 }
 
-.template img {
+.template-img img {
     width: 100%;
     height: 150px;
     object-fit: cover;
 }
 
-.template h3 {
-    font-size: 1.5em;
+.template p.nome {
+    font-size: 1.2em;
+    color: #333;
     margin: 10px 0;
-}
-
-.template p {
-    font-size: 1em;
-    color: #555;
 }
 
 .template button {

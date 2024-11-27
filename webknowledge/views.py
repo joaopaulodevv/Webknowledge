@@ -100,6 +100,7 @@ def editar_perfil_prof(request):
             else None
         )
     
+<<<<<<< HEAD
     return render(request, 'minhacontaprofessor.html', {
         'form': form,
         'formprof': formprof,
@@ -133,3 +134,10 @@ def primeirologin(request):
 
 
             )
+=======
+    return render(request, 'minhacontaprofessor.html', {'form': form})
+
+
+def professor(request):
+    return render(request,"professores.html")
+>>>>>>> 95d88450172e9e6b6547347706a234d504ddba0f
