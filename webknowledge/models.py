@@ -11,6 +11,7 @@ class Usuariosite(models.Model):
     datadenascimento = models.DateField()
     nota = models.FloatField()
     nome = models.CharField(max_length=100)
+    
     TIPO_CONTA = (
         ('professor', 'Professor'),
         ('aluno', 'Aluno'),
@@ -29,7 +30,7 @@ class Aluno(models.Model):
         on_delete=models.CASCADE,
         primary_key=True,
     )
-    qtdaulasassistidas = models.IntegerField()
+    qtdaulasassistidas = models.IntegerField(null=True, blank=True)
 
     def agendaraula(self, professor):
 
@@ -46,39 +47,16 @@ class Professor(models.Model):
         primary_key=True,
     )
 
-    qtdaulasfeitas = models.IntegerField()
-    disciplina = models.CharField(max_length=40)
-    especialidade = models.CharField(max_length=200)
+    qtdaulasfeitas = models.IntegerField(null=True, blank=True)
+    disciplina = models.CharField(null=True, blank=True, max_length=40, default="Indefinido") 
+    especialidade = models.CharField(null=True, blank=True, max_length=200)
 
     def criarPerfil(self):
-        
         pass
 
     def darAula(self):
-        
         pass
 
     def __str__(self):
         return f'Professor {self.usuario.nome} - Especialidade: {self.especialidade}'
 
-
-class Aula(models.Model):
-    dataAula = models.DateField()
-    professor = models.ForeignKey(Professor, on_delete=models.CASCADE)
-    
-    def __str__(self):
-        return f'Aula {self.professor} - {self.dataAula}'
-
-
-class Avaliacao(models.Model):  
-   
-    avaliada =  models.ForeignKey(Usuariosite, on_delete=models.CASCADE) 
-    nota = models.FloatField()  
-    comentario = models.CharField(max_length=200)
-
-    def enviar(self):
-        
-        pass
-
-    def __str__(self):
-        return f'Avaliacao {self.id} - Nota: {self.nota}'

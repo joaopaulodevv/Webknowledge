@@ -17,8 +17,20 @@
         
         <div class="login-box">
             <form method="post" enctype="multipart/form-data">
+                {% if usuario.tipo_conta == "professor" %}
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    {{formprof.as_p}}
+                                
+                {% else %}
                 {% csrf_token %}
-                {{ form.as_p }}
+                    {{ form.as_p }}
+                            
+                            
+                    
+                    
+                {% endif %}
+                
 
                 <button type="submit">Salvar</button>
             </form>

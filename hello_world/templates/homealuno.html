@@ -20,7 +20,7 @@
     <main>
         <div class="container">
             <h2>Bem-vindo, {{meuuser.nome}}!</h2>
-            <p>Escolha um dos templates de professores para começar o seu aprendizado:</p>
+            <p>Escolha um dos nossos professores para começar o seu aprendizado:</p>
 
             <div class="templates">
                 {% if usuarios %}
@@ -34,7 +34,7 @@
                                 {% endif %}
                             </div>
                             <p class="nome">{{ usuario.nome }}</p>
-                            <button>Ver perfil</button>
+                            <button><a href="/professor/{{usuario.id}}">Ver perfil</a></button>
                         </div>
                     {% endfor %}
                 {% else %}

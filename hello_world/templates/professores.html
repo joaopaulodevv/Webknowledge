@@ -1,0 +1,35 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Webknowledge - Professores</title>
+    <link rel="stylesheet" href="{% static 'homealuno.css' %}">
+</head>
+<body>
+    <header>
+        <h1>Webknowledge <img src="{% static 'icone2.png' %}" alt="logo" width="30"></h1>
+        <nav>
+            <a href="#">Home</a>
+            <a href="/minhaconta/">Minha Conta</a>
+            <a href="/logout/">Sair</a>
+        </nav>
+    </header>
+    <main>
+        <div class="container">
+            <h2>Professor {{prof.nome}}
+            </h2>
+            <h3>{% if prof.perfil_imagem %}
+                <img src="{{ prof.perfil_imagem.url }}" class="icone" alt="Imagem de perfil">
+            {% else %}
+                <img src="{% static 'usuariosemfoto.jpg' %}" class="icone" alt="Imagem de perfil padrão">
+            {% endif %}</h3>
+            <p>{{ prof.professor.disciplina }}</p>
+            <p>{{ prof.professor.especialidade }}</p>
+            
+        </div>
+    </main>
+</body>
+</html>
