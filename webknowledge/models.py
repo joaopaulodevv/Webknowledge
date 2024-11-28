@@ -50,7 +50,7 @@ class Professor(models.Model):
     qtdaulasfeitas = models.IntegerField(null=True, blank=True)
     disciplina = models.CharField(null=True, blank=True, max_length=40, default="Indefinido") 
     especialidade = models.CharField(null=True, blank=True, max_length=200)
-
+    descricao = models.TextField(null=True, blank=True, max_length=900)
     def criarPerfil(self):
         pass
 

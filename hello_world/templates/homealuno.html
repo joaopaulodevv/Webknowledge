@@ -30,7 +30,7 @@
                                 {% if usuario.perfil_imagem %}
                                     <img src="{{ usuario.perfil_imagem.url }}" class="icone" alt="Imagem de perfil">
                                 {% else %}
-                                    <img src="{% static 'usuariosemfoto.jpg' %}" class="icone" alt="Imagem de perfil padrão">
+                                    <img src="{% static 'usuariosemfoto.jpg' %}" class="icone" alt="Imagem de perfil padrão" width = 5px>
                                 {% endif %}
                             </div>
                             <p class="nome">{{ usuario.nome }}</p>

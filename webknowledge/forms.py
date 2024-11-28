@@ -24,4 +24,4 @@ class UsuariositeForm(forms.ModelForm):
 class ProfessorsiteForm(forms.ModelForm):
     class Meta:
         model = Professor
-        fields = ['disciplina', 'especialidade']
+        fields = ['disciplina', 'especialidade','descricao']
