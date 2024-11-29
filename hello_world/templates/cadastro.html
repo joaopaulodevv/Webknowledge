@@ -7,38 +7,75 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="GitHub Codespaces ♥️ Django">
-    <meta name="author" content="GitHub Codespaces">
-    <meta name="generator" content="GitHub Codespaces">
     <meta name="theme-color" content="#000000">
-    <title>{% block title %}Cadastro | Webknowledge{% endblock %}</title>
-
-    <link rel="stylesheet" href="{% static 'cadastro.css' %}">
+    <title>Cadastro - WebKnowledge</title>
+    
+    <link rel="stylesheet" href="{% static 'login.css' %}">
 </head>
 
-<body>
+<body style="background: url('{% static 'pattern.png' %}') no-repeat center center/cover; background-color: #1e1e1e;">
 
-    <div class="background-pattern"></div>
-
-    <div class="login-container">
-        <div class="brand-logo">
-            Webknowledge <span><img src="{% static 'icone2.png' %}" alt="icon" width="40"></span>
+    <div class="container">
+        <div class="logo">
+            <h1>WebKnowledge</h1>
         </div>
-        <div class="login-box">
-           
-            <form method="post">
+        
+        <div class="register-box">
+            <h2>Cadastro</h2>
+            <form method="POST">
                 {% csrf_token %}
-                {{form}}
-                {{form2}}
-                <button type="submit">Cadastrar</button>
+                {{ form.non_field_errors }}
+                {{ form2.non_field_errors }}
+                <div class="form-group">
+                    {{ form.username.label_tag }}
+                    {{ form.username.errors }}
+                    {{ form.username }}
+                </div>
+                <div class="form-group">
+                    {{ form.nome.label_tag }}
+                    {{ form.nome.errors }}
+                    {{ form.nome }}
+                </div>
+                <div class="form-group">
+                    {{ form.email.label_tag }}
+                    {{ form.email.errors }}
+                    {{ form.email }}
+                </div>
+                <div class="form-group">
+                    {{ form.password1.label_tag }}
+                    {{ form.password1.errors }}
+                    {{ form.password1 }}
+                </div>
+                <div class="form-group">
+                    {{ form.password2.label_tag }}
+                    {{ form.password2.errors }}
+                    {{ form.password2 }}
+                </div>
+            
+                <!-- Formulário de Usuariosite -->
+                <div class="form-group">
+                    {{ form2.cpf.label_tag }}
+                    {{ form2.cpf.errors }}
+                    {{ form2.cpf }}
+                </div>
+                <div class="form-group">
+                    {{ form2.datadenascimento.label_tag }}
+                    {{ form2.datadenascimento.errors }}
+                    {{ form2.datadenascimento }}
+                </div>
+                <div class="form-group">
+                    {{ form2.tipo_conta.label_tag }}
+                    {{ form2.tipo_conta.errors }}
+                    {{ form2.tipo_conta }}
+                </div>
+                
+            
+                <button type="submit">Criar Conta</button>
             </form>
-            <a href="/">Já tem uma conta? Entre aqui.</a>
+             
+            <a href="/">Já tem uma conta? Entre aqui</a>
         </div>
     </div>
-
-    <div class="icons">
-        <a href="/sobrenos/">Sobre nós</a>
-    </div>
-
 </body>
+
 </html>

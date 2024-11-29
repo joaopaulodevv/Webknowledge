@@ -22,15 +22,13 @@ def cadastro(request):
     usuariosite_form = UsuariositeForm(request.POST)
     
     if user_form.is_valid() and usuariosite_form.is_valid():
-        user = user_form.save()  # Cria o objeto User
+        user = user_form.save()  
         usuariosite = usuariosite_form.save(commit=False)  
         usuariosite.usuario = user  
         usuariosite.nome = user.username
         usuariosite.nota = 5.0  
         usuariosite.email = user.email
-        usuariosite.save()  # Salva o Usuariosite associado ao User
-
-        # Faz o primeiro login e cria objetos associados (se necessário)
+        usuariosite.save()  
         login(request, user)
         primeirologin(request)
 
