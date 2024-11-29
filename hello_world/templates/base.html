@@ -1,0 +1,71 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Webknowledge{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'login.css' %}">
+    <style>
+        /* Cabeçalho fixo e ajustado à esquerda */
+        header {
+            display: flex;
+            align-items: center;
+            justify-content: flex-start; /* Alinha à esquerda */
+            padding: 10px 20px;
+            background-color: #1e1e1e; /* A cor correta */
+            position: fixed; /* Cabeçalho fixo */
+            top: 0;
+            width: 100%;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+            z-index: 1000;
+        }
+
+        header h1 {
+            display: flex;
+            align-items: center;
+            color: white;
+            font-size: 1.5rem;
+            margin-right: 20px; /* Espaço entre o logo e o menu */
+        }
+
+        header img {
+            margin-left: 10px;
+        }
+
+        nav {
+            display: flex;
+            align-items: center;
+            gap: 15px; /* Espaço entre os links */
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-size: 1rem;
+        }
+
+        nav a:hover {
+            text-decoration: underline;
+        }
+
+        body {
+            padding-top: 60px; /* Compensa o cabeçalho fixo */
+        }
+    </style>
+</head>
+<body style="background: url('{% static 'pattern.png' %}') no-repeat center center/cover; background-color: #1e1e1e;">
+    <header>
+        <h1>Webknowledge <img src="{% static 'icone2.png' %}" alt="logo" width="30"></h1>
+        <nav>
+            <a href="/homealuno/">Home</a>
+            <a href="/minhaconta/">Minha Conta</a>
+            <a href="/logout/">Sair</a>
+            <a href="/minhasconversas/">Minhas Conversas</a>
+        </nav>
+    </header>
+
+    {% block content %}{% endblock %}
+</body>
+</html>

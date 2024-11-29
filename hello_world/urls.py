@@ -32,6 +32,7 @@ urlpatterns = [
     path("logout/",views.logout_usuario, name="logout_usuario"),
     path("minhaconta/",views.editar_perfil_prof),
     path("professor/<int:iduser>",views.professor),
+    path("minhasconversas/",views.lista_conversas),
 
 ]
 if settings.DEBUG:

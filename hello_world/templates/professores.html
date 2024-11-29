@@ -1,3 +1,9 @@
+{% extends 'base.html' %}
+
+{% block title %}Professor - Webknowledge{% endblock %}
+
+{% block content %}
+
 {% load static %}
 
 <!DOCTYPE html>
@@ -5,31 +11,99 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Webknowledge - Professores</title>
-    <link rel="stylesheet" href="{% static 'homealuno.css' %}">
+    <title>Webknowledge - Professor</title>
+    <link rel="stylesheet" href="{% static 'login.css' %}">
+    <style>
+        body {
+            background: url('{% static 'pattern.png' %}') no-repeat center center/cover;
+            background-color: #1e1e1e;
+            color: white;
+            font-family: Arial, sans-serif;
+            padding-top: 60px; /* Espaço para o cabeçalho fixo */
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Estilo da imagem redonda */
+        .icone {
+            border-radius: 50%;
+            width: 150px;
+            height: 150px;
+            object-fit: cover;
+            margin: 20px auto;
+            display: block;
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 2rem;
+        }
+
+        .template {
+            background-color: #e3e3f7;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+            margin-top: 20px;
+        }
+
+        .descricao {
+            margin-bottom: 15px;
+        }
+
+        .descricao strong {
+            font-size: 1.2rem;
+            color: #333;
+        }
+
+        .descricao p {
+            font-size: 1rem;
+            color: #555;
+        }
+    </style>
 </head>
 <body>
-    <header>
-        <h1>Webknowledge <img src="{% static 'icone2.png' %}" alt="logo" width="30"></h1>
-        <nav>
-            <a href="#">Home</a>
-            <a href="/minhaconta/">Minha Conta</a>
-            <a href="/logout/">Sair</a>
-        </nav>
-    </header>
-    <main>
-        <div class="container">
-            <h2>Professor {{prof.nome}}
-            </h2>
-            <h3>{% if prof.perfil_imagem %}
+
+<main>
+    <div class="container">
+        <h2>Professor {{ prof.nome }}</h2>
+
+        <!-- Imagem do Professor -->
+        <div class="template-img">
+            {% if prof.perfil_imagem %}
                 <img src="{{ prof.perfil_imagem.url }}" class="icone" alt="Imagem de perfil">
             {% else %}
                 <img src="{% static 'usuariosemfoto.jpg' %}" class="icone" alt="Imagem de perfil padrão">
-            {% endif %}</h3>
-            <p>{{ prof.professor.disciplina }}</p>
-            <p>{{ prof.professor.especialidade }}</p>
-            <p>{{ prof.professor.descricao }}</p>
+            {% endif %}
         </div>
-    </main>
+
+        <!-- Detalhes do professor -->
+        <div class="template">
+            <div class="descricao">
+                <strong>Disciplina:</strong>
+                <p>{{ prof.professor.disciplina }}</p>
+            </div>
+
+            <div class="descricao">
+                <strong>Especialidade:</strong>
+                <p>{{ prof.professor.especialidade }}</p>
+            </div>
+
+            <div class="descricao">
+                <strong>Descrição:</strong>
+                <p>{{ prof.professor.descricao }}</p>
+            </div>
+        </div>
+    </div>
+</main>
+
 </body>
 </html>
+
+
+{% endblock %}

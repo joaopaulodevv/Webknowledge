@@ -1,4 +1,14 @@
+
+{% extends 'base.html' %}
 {% load static %}
+
+
+{% block title %}Home Aluno - WebKnowledge{% endblock %}
+
+{% block content %}
+
+
+
 
 <!DOCTYPE html>
 <html lang="pt-BR">
@@ -6,20 +16,65 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Webknowledge - Professores</title>
-    <link rel="stylesheet" href="{% static 'homealuno.css' %}">
+    <link rel="stylesheet" href="{% static 'login.css' %}">
+    <style>
+        
+        .templates {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .template {
+            width: 200px;
+            text-align: center;
+            background-color: #e3e3f7;
+            border-radius: 8px;
+            padding: 10px;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .template img {
+            border-radius: 50%;
+            width: 100px;
+            height: 100px;
+            object-fit: cover;
+        }
+
+
+
+        
+        
+        
+
+        
+      
+        .nome {
+            color: black; 
+            font-size: 1rem;
+            margin: 10px 0;
+        }
+
+        button a {
+            text-decoration: none;
+            color: white;
+        }
+
+
+    body {
+        padding-top: 60px; 
+    }
+</style>
+
+    
+   
 </head>
-<body>
-    <header>
-        <h1>Webknowledge <img src="{% static 'icone2.png' %}" alt="logo" width="30"></h1>
-        <nav>
-            <a href="#">Home</a>
-            <a href="/minhaconta/">Minha Conta</a>
-            <a href="/logout/">Sair</a>
-        </nav>
-    </header>
+<body style="background: url('{% static 'pattern.png' %}') no-repeat center center/cover; background-color: #1e1e1e;">
+    
     <main>
         <div class="container">
-            <h2>Bem-vindo, {{meuuser.nome}}!</h2>
+            <h2>Bem-vindo, {{ meuuser.nome }}!</h2>
             <p>Escolha um dos nossos professores para começar o seu aprendizado:</p>
 
             <div class="templates">
@@ -28,20 +83,23 @@
                         <div class="template">
                             <div class="template-img">
                                 {% if usuario.perfil_imagem %}
-                                    <img src="{{ usuario.perfil_imagem.url }}" class="icone" alt="Imagem de perfil">
+                                    <img src="{{ usuario.perfil_imagem.url }}" alt="Imagem de perfil">
                                 {% else %}
-                                    <img src="{% static 'usuariosemfoto.jpg' %}" class="icone" alt="Imagem de perfil padrão" width = 5px>
+                                    <img src="{% static 'usuariosemfoto.jpg' %}" alt="Imagem de perfil padrão">
                                 {% endif %}
                             </div>
                             <p class="nome">{{ usuario.nome }}</p>
-                            <button><a href="/professor/{{usuario.id}}">Ver perfil</a></button>
+                            <button>
+                                <a href="/professor/{{ usuario.id }}" style="color: white; text-decoration: none;">Ver perfil</a>
+                            </button>
                         </div>
                     {% endfor %}
                 {% else %}
-                    <p>Nenhum professor encontrado.</p>
+                    <p class="no-teachers">Nenhum professor encontrado.</p>
                 {% endif %}
             </div>
         </div>
     </main>
 </body>
 </html>
+{% endblock %}

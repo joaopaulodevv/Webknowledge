@@ -60,3 +60,21 @@ class Professor(models.Model):
     def __str__(self):
         return f'Professor {self.usuario.nome} - Especialidade: {self.especialidade}'
 
+
+class Conversa(models.Model):
+    aluno = models.ForeignKey(Aluno, on_delete=models.CASCADE, related_name="conversas_aluno")
+    professor = models.ForeignKey(Professor, on_delete=models.CASCADE, related_name="conversas_professor")
+    criada_em = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"Conversa entre {self.aluno.username} e {self.professor.username} - {self.criada_em}"
+    
+
+class Mensagem(models.Model):
+    conversa = models.ForeignKey(Conversa, on_delete=models.CASCADE, related_name="mensagens")
+    remetente = models.ForeignKey(Usuariosite, on_delete=models.CASCADE)
+    texto = models.TextField()
+    enviada_em = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"Mensagem de {self.remetente.username} em {self.enviada_em}"
