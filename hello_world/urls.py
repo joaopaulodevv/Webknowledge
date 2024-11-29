@@ -33,6 +33,8 @@ urlpatterns = [
     path("minhaconta/",views.editar_perfil_prof),
     path("professor/<int:iduser>",views.professor),
     path("minhasconversas/",views.lista_conversas),
+    path('nova_conversa/<int:professor_id>/', views.nova_conversa, name='nova_conversa'),
+    #path('conversa/<int:conversa_id>/', views.detalhe_conversa, name='detalhe_conversa'),
 
 ]
 if settings.DEBUG:

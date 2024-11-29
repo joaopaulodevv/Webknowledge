@@ -1,10 +1,10 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import login, logout 
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import AuthenticationForm
 from .forms import EditarPerfilForm, NovoUsuarioForm, UsuariositeForm,ProfessorsiteForm
 from .models import Usuariosite , Professor, Aluno, Conversa, Mensagem
-
+from django.contrib.auth.models import User
 
 def index(request):
   formulario = AuthenticationForm()
@@ -132,15 +132,29 @@ def primeirologin(request):
 
 def lista_conversas(request):
     if request.user.is_authenticated:
-        # Verifique se o usuário é um aluno ou professor
-        if hasattr(request.user.usuariosite, 'aluno'):  # Verifica se o usuário tem um perfil de aluno
+        
+        if hasattr(request.user.usuariosite, 'aluno'): 
             conversas = Conversa.objects.filter(aluno=request.user.usuariosite.aluno)
-        elif hasattr(request.user.usuariosite, 'professor'):  # Verifica se o usuário tem um perfil de professor
+        elif hasattr(request.user.usuariosite, 'professor'): 
             conversas = Conversa.objects.filter(professor=request.user.usuariosite.professor)
         else:
-            # Caso o usuário não seja aluno nem professor, você pode redirecionar ou mostrar uma mensagem de erro
             return redirect('/')
     
         return render(request, 'listaconversas.html', {'conversas': conversas})
     
     return redirect('/')
+
+
+@login_required
+def nova_conversa(request, professor_id):
+    professor = get_object_or_404(User, id=professor_id)
+    
+    aluno = request.user.usuariosite.aluno  
+
+   
+    if not Conversa.objects.filter(aluno=aluno, professor=professor).exists():
+        
+        conversa = Conversa(aluno=aluno, professor=professor)
+        conversa.save()
+
+    return redirect('detalhe_conversa', conversa_id=conversa.id)
