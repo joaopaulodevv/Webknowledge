@@ -1,0 +1,48 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Webknowledge - Novidades e Sobre Nós">
+    <meta name="author" content="Webknowledge Team">
+    <meta name="theme-color" content="#000000">
+    <title>Novidades e Sobre Nós | Webknowledge</title>
+    <link rel="stylesheet" href="{% static 'sobre_nos.css' %}">
+</head>
+
+<body>
+    <div class="background-pattern"></div>
+
+    <header class="header-container">
+        <h1 class="brand-logo">
+            Webknowledge <img src="{% static 'icone2.png' %}" alt="Ícone" class="logo">
+        </h1>
+        <nav class="icons">
+            <a href="/" class="button-link">Entrar</a>
+        </nav>
+    </header>
+    
+    <main class="content-container">
+        <section class="news-box">
+            <h2 class="headers">Últimas Novidades</h2>
+            <p>Aqui você encontra as últimas atualizações e notícias sobre nossa plataforma. Fique por dentro!</p>
+            <ul>
+                <li>Cadastro e Login de usuário.</li>
+                <li>Atualização de interface para facilitar a navegação dos usuários.</li>
+                <li>Imagens de perfil.</li>
+            </ul>
+        </section>
+
+        <section class="about-box">
+            <h2 class="headers">Sobre Nós</h2>
+            <p>A Webknowledge é uma plataforma dedicada a conectar alunos com os melhores tutores. Nossa missão é oferecer um ambiente de aprendizado acessível, prático e eficiente.</p>
+            <img src="{% static 'autismo.jpg' %}" alt="Imagem ilustrativa" class="about-image">
+            <p>Desde nossa fundação em 2024, temos ajudado milhares de estudantes a alcançar seus objetivos acadêmicos, proporcionando um serviço personalizado e de qualidade.</p>
+        </section>
+    </main>
+</body>
+
+</html>
