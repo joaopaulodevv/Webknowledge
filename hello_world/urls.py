@@ -28,7 +28,7 @@ urlpatterns = [
     path("__reload__/", include("django_browser_reload.urls")),
     path("cadastro/",views.cadastro, name="cadastro"),
     path("sobrenos/",views.sobrenos, name="sobrenos"),
-    path("homealuno/",views.homealuno),
+    path("homealuno/",views.homealuno, name="homealuno"),
     path("logout/",views.logout_usuario, name="logout_usuario"),
     path("minhaconta/",views.editar_perfil_prof),
     path("professor/<int:iduser>",views.professor),

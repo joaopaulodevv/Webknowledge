@@ -5,6 +5,8 @@ from django.contrib.auth.forms import AuthenticationForm
 from .forms import EditarPerfilForm, NovoUsuarioForm, UsuariositeForm,ProfessorsiteForm,MensagemForm
 from .models import Usuariosite , Professor, Aluno, Conversa, Mensagem
 from django.contrib.auth.models import User
+from django.db.models import Q
+
 
 def index(request):
   formulario = AuthenticationForm()
@@ -48,13 +50,21 @@ def sobrenos(request):
 
 @login_required
 def homealuno(request):
+    busca = request.GET.get('busca', '')
+    usuarios = Usuariosite.objects.filter(tipo_conta="professor")
+    if busca:
+        usuarios = usuarios.filter(
+            Q(nome__icontains=busca) |  
+            Q(professor__disciplina__icontains=busca) |  
+            Q(professor__especialidade__icontains=busca) 
+        )
 
-    usuarios  = Usuariosite.objects.filter(tipo_conta="professor")
-    meuusuario = request.user.usuariosite
-   
-
-    return render(request,"homealuno.html",{"usuarios": usuarios, "meuuser":meuusuario})
-
+    context = {
+        'meuuser': request.user.usuariosite,
+        'usuarios': usuarios,
+        'busca': busca, 
+    }
+    return render(request, 'homealuno.html', context)
 
 @login_required
 def logout_usuario(request):

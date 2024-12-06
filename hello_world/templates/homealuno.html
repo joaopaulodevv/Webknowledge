@@ -1,15 +1,9 @@
-
 {% extends 'base.html' %}
 {% load static %}
-
 
 {% block title %}Home Aluno - WebKnowledge{% endblock %}
 
 {% block content %}
-
-
-
-
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -18,7 +12,6 @@
     <title>Webknowledge - Professores</title>
     <link rel="stylesheet" href="{% static 'login.css' %}">
     <style>
-        
         .templates {
             display: flex;
             flex-wrap: wrap;
@@ -27,12 +20,20 @@
         }
 
         .template {
+            position: relative;
             width: 200px;
             text-align: center;
             background-color: #e3e3f7;
             border-radius: 8px;
             padding: 10px;
             box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+            overflow: hidden;
+        }
+
+        .template:hover {
+            transform: scale(1.05);
+            box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.2);
         }
 
         .template img {
@@ -42,18 +43,58 @@
             object-fit: cover;
         }
 
-
-
-        
-        
-        
-
-        
-      
         .nome {
-            color: black; 
+            color: black;
             font-size: 1rem;
             margin: 10px 0;
+        }
+
+        .template-hover-info {
+            display: none;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            color: white;
+            border-radius: 8px;
+            padding: 20px;
+            box-sizing: border-box;
+            text-align: center;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            flex-direction: column;
+            z-index: 10;
+        }
+
+        .template:hover .template-hover-info {
+            display: flex;
+        }
+
+        .template button {
+            margin-top: 10px;
+        }
+
+        .template:hover .template-hover-info {
+            top: 0;
+        }
+
+        .template-hover-info + button {
+            position: relative;
+            z-index: 11;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 6px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .template-hover-info + button:hover {
+            background-color: #007bff;
         }
 
         button a {
@@ -61,22 +102,20 @@
             color: white;
         }
 
-
-    body {
-        padding-top: 60px; 
-    }
-</style>
-
-    
-   
+        body {
+            padding-top: 60px;
+        }
+    </style>
 </head>
 <body style="background: url('{% static 'pattern.png' %}') no-repeat center center/cover; background-color: #1e1e1e;">
-    
     <main>
         <div class="container">
             <h2>Bem-vindo, {{ meuuser.nome }}!</h2>
             <p>Escolha um dos nossos professores para começar o seu aprendizado:</p>
-
+            <form method="GET" action="{% url 'homealuno' %}">
+                <input type="text" name="busca" placeholder="Buscar por nome, disciplina ou especialidade" value="{{ busca|default_if_none:'' }}">
+                <button type="submit">Buscar</button>
+            </form>
             <div class="templates">
                 {% if usuarios %}
                     {% for usuario in usuarios %}
@@ -89,6 +128,10 @@
                                 {% endif %}
                             </div>
                             <p class="nome">{{ usuario.nome }}</p>
+                            <div class="template-hover-info">
+                                <p><strong>Disciplina:</strong> {{ usuario.professor.disciplina }}</p>
+                                <p><strong>Especialidade:</strong> {{ usuario.professor.especialidade }}</p>
+                            </div>
                             <button>
                                 <a href="/professor/{{ usuario.id }}" style="color: white; text-decoration: none;">Ver perfil</a>
                             </button>
