@@ -1,0 +1,94 @@
+{% extends 'base.html' %}
+
+{% block title %}Minhas Conversas{% endblock %}
+
+{% block content %}
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        .conversa {
+            border-bottom: 1px solid #ddd;
+            padding: 10px 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .conversa:last-child {
+            border-bottom: none;
+        }
+
+        .conversa strong {
+            color: #555;
+        }
+
+        .btn {
+            background-color: #007bff;
+            color: white;
+            text-decoration: none;
+            padding: 5px 10px;
+            border-radius: 4px;
+            font-size: 0.9rem;
+        }
+
+        .btn:hover {
+            background-color: #0056b3;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Minhas Conversas</h1>
+
+        {% if conversas %}
+        <div class="conversas">
+            <ul>
+                {% for conversa in conversas %}
+                    <li>
+                        <a href="{% url 'detalhe_conversa' conversa.id %}">
+                            Conversa com 
+                            {% if usuario.tipo_conta == 'aluno' %}
+                                {{ conversa.professor.usuario.nome }}
+                            {% else %}
+                                {{ conversa.aluno.usuario.nome }}
+                            {% endif %}
+                        </a>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+        
+        {% else %}
+            <p>Você ainda não possui conversas.</p>
+        {% endif %}
+    </div>
+</body>
+</html>
+
+{% endblock %}

@@ -1,5 +1,5 @@
 from django import forms
-from .models import Professor, Aluno, Usuariosite
+from .models import Professor, Aluno, Usuariosite, Mensagem
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 
@@ -25,3 +25,10 @@ class ProfessorsiteForm(forms.ModelForm):
     class Meta:
         model = Professor
         fields = ['disciplina', 'especialidade','descricao']
+
+
+
+class MensagemForm(forms.ModelForm):
+    class Meta:
+        model = Mensagem
+        fields = ['texto']

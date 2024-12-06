@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import login, logout 
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import AuthenticationForm
-from .forms import EditarPerfilForm, NovoUsuarioForm, UsuariositeForm,ProfessorsiteForm
+from .forms import EditarPerfilForm, NovoUsuarioForm, UsuariositeForm,ProfessorsiteForm,MensagemForm
 from .models import Usuariosite , Professor, Aluno, Conversa, Mensagem
 from django.contrib.auth.models import User
 
@@ -107,9 +107,9 @@ def editar_perfil_prof(request):
 
 @login_required
 def professor(request,iduser):
-
+    usuario = request.user.usuariosite  
     user = Usuariosite.objects.get(id=iduser)
-    return render(request,"professores.html",{"prof":user})
+    return render(request,"professores.html",{"prof":user,"id":iduser,"usuario":usuario })
 
 
 def primeirologin(request):
@@ -132,29 +132,59 @@ def primeirologin(request):
 
 def lista_conversas(request):
     if request.user.is_authenticated:
+        usuario = request.user.usuariosite
         
-        if hasattr(request.user.usuariosite, 'aluno'): 
-            conversas = Conversa.objects.filter(aluno=request.user.usuariosite.aluno)
-        elif hasattr(request.user.usuariosite, 'professor'): 
-            conversas = Conversa.objects.filter(professor=request.user.usuariosite.professor)
+        if hasattr(usuario, 'aluno'): 
+            conversas = Conversa.objects.filter(aluno=usuario.aluno).select_related('professor__usuario')
+        elif hasattr(usuario, 'professor'): 
+            conversas = Conversa.objects.filter(professor=usuario.professor).select_related('aluno__usuario')
         else:
             return redirect('/')
-    
-        return render(request, 'listaconversas.html', {'conversas': conversas})
+        
+        return render(request, 'listaconversas.html', {'conversas': conversas, 'usuario': usuario})
     
     return redirect('/')
 
 
+
 @login_required
 def nova_conversa(request, professor_id):
-    professor = get_object_or_404(User, id=professor_id)
-    
+    professor = get_object_or_404(Professor, usuario_id=professor_id)  # Corrigido aqui
     aluno = request.user.usuariosite.aluno  
 
-   
-    if not Conversa.objects.filter(aluno=aluno, professor=professor).exists():
-        
-        conversa = Conversa(aluno=aluno, professor=professor)
-        conversa.save()
+    conversa, created = Conversa.objects.get_or_create(aluno=aluno, professor=professor)
 
+ 
     return redirect('detalhe_conversa', conversa_id=conversa.id)
+
+@login_required
+def detalhe_conversa(request, conversa_id):
+    conversa = get_object_or_404(Conversa, id=conversa_id)
+    usuariosite = request.user.usuariosite
+
+    if hasattr(usuariosite, 'aluno'):  
+        outro_participante = conversa.professor.usuario
+    elif hasattr(usuariosite, 'professor'):  
+        outro_participante = conversa.aluno.usuario
+    else:
+        outro_participante = None
+
+    if request.method == "POST":
+        form = MensagemForm(request.POST)
+        if form.is_valid():
+            mensagem = form.save(commit=False)
+            mensagem.conversa = conversa
+            mensagem.remetente = usuariosite
+            mensagem.save()
+            return redirect('detalhe_conversa', conversa_id=conversa.id)
+    else:
+        form = MensagemForm()
+
+    mensagens = Mensagem.objects.filter(conversa=conversa)
+
+    return render(request, 'detalhe_conversa.html', {
+        'conversa': conversa,
+        'mensagens': mensagens,
+        'form': form,
+        'outro_participante': outro_participante,  # Enviar o outro participante
+    })

@@ -1,0 +1,132 @@
+{% extends 'base.html' %}
+
+{% block title %}Detalhe da Conversa{% endblock %}
+
+{% block content %}
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detalhe da Conversa</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+            margin: 0;
+            padding: 0;
+            color:#333;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        .mensagens {
+            margin: 20px 0;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            background-color: #f1f1f1;
+            max-height: 400px;
+            overflow-y: auto;
+        }
+
+        .mensagem {
+            margin-bottom: 15px;
+            padding: 10px;
+            border-radius: 8px;
+            background-color: #e3e3f7;
+        }
+
+        .mensagem.aluno {
+            background-color: #d1ffd1;
+            text-align: right;
+        }
+
+        .mensagem.professor {
+            background-color: #fdd;
+            text-align: left;
+        }
+
+        .mensagem small {
+            display: block;
+            margin-top: 5px;
+            color: #555;
+            font-size: 0.9rem;
+        }
+
+        .form-enviar {
+            display: flex;
+            margin-top: 20px;
+        }
+
+        .form-enviar textarea {
+            flex: 1;
+            resize: none;
+            height: 50px;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            margin-right: 10px;
+        }
+
+        .form-enviar button {
+            background-color: #007bff;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+
+        .form-enviar button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="container">
+            <h1>Conversa com {{ outro_participante.nome }}</h1>
+        
+            <div class="mensagens">
+                {% for mensagem in mensagens %}
+                    <div class="mensagem {% if mensagem.remetente == request.user.usuariosite %}enviada{% else %}recebida{% endif %}">
+                        <p>{{ mensagem.texto }}</p>
+                        <small>
+                            {% if mensagem.remetente == request.user.usuariosite %}
+                                Você
+                            {% else %}
+                                {{ mensagem.remetente.nome }}
+                            {% endif %}
+                            {{ mensagem.enviada_em|date:"d/m/Y H:i" }}
+                        </small>
+                    </div>
+                {% endfor %}
+            </div>
+        
+            <form method="POST">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit">Enviar</button>
+            </form>
+        </div>
+        
+        
+    </div>
+</body>
+</html>
+
+{% endblock %}
