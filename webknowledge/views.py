@@ -46,7 +46,7 @@ def cadastro(request):
 
 
 def sobrenos(request):
-    return render(request,"sobrenos.html")
+    return render(request,"sobre_nos2.0.html")
 
 @login_required
 def homealuno(request):
