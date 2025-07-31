@@ -1,25 +1,64 @@
-# GitHub Codespaces ♥️ Django
 
-Welcome to your shiny new Codespace running Django! We've got everything fired up and running for you to explore Django.
+# WebKnowledge
 
-You've got a blank canvas to work on from a git perspective as well. There's a single initial commit with what you're seeing right now - where you go from here is up to you!
+**WebKnowledge** is a web platform built with Django for a college work designed to connect individuals with special learning needs to qualified and experienced teachers. The system facilitates inclusive and personalized education by helping students find instructors who match their specific requirements.
 
-Everything you do here is contained within this one codespace. There is no repository on GitHub yet. If and when you’re ready you can click "Publish Branch" and we’ll create your repository and push up your project. If you were just exploring then and have no further need for this code then you can simply delete your codespace and it's gone forever.
+## 🎯 Purpose
 
-## installing dependancies
+Provide a digital environment that:
 
-```python
+- Helps students with learning difficulties find personalized support.
+- Allows specialized teachers to offer their services directly.
+- Promotes educational inclusion through accessible technology.
+
+## 🧠 Key Features
+
+- **User Registration for Students and Teachers**
+  - Profiles with specialization, subject area, availability, and description.
+- **Dynamic Homepage for Students**
+  - Displays available teachers, filterable by specialization and more.
+- **Simple Messaging System (CRUD-based)**
+  - Students can initiate a conversation with teachers through a single button.
+- **Search Bar**
+  - Allows filtering of teachers by specialization or keywords.
+- **Custom Templates**
+  - Different layouts and dashboards for students and teachers.
+- **Login and Authentication System**
+  - Secure access to user dashboards and features.
+
+## 🛠️ Tech Stack
+
+- **Backend:** Django (Python)
+- **Frontend:** Django Templates
+- **Database:** SQLite (for development), PostgreSQL (planned support)
+- **Dev Environment:** GitHub Codespaces
+
+
+## 📁 Project Structure (simplified)
+
+```
+webknowledge/
+├── accounts/           # Authentication and user profiles
+├── chat/               # Messaging system
+├── core/               # Core logic and student homepage
+├── professors/         # Teacher registration and listings
+├── templates/          # HTML templates by user type
+├── static/             # Static files (CSS, JS, images)
+├── manage.py
+└── requirements.txt
+```
+
+## 🚀 Running the Project Locally
+
+```bash
+git clone https://github.com/your-username/webknowledge.git
+cd webknowledge
+python -m venv venv
+source venv/bin/activate        # On Linux/macOS
+venv\Scripts\activate           # On Windows
 pip install -r requirements.txt
-```
-
-## To collect static files:
-
-```python
-python manage.py collectstatic
-```
-
-## To run this application:
-
-```python
+python manage.py migrate
 python manage.py runserver
 ```
+
+Open your browser at: [http://127.0.0.1:8000](http://127.0.0.1:8000)
