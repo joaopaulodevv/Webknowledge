@@ -3,7 +3,7 @@
 
 **WebKnowledge** is a web platform built with Django for a college work designed to connect individuals with special learning needs to qualified and experienced teachers. The system facilitates inclusive and personalized education by helping students find instructors who match their specific requirements.
 
-## 🎯 Purpose
+## Purpose
 
 Provide a digital environment that:
 
@@ -11,7 +11,7 @@ Provide a digital environment that:
 - Allows specialized teachers to offer their services directly.
 - Promotes educational inclusion through accessible technology.
 
-## 🧠 Key Features
+## Key Features
 
 - **User Registration for Students and Teachers**
   - Profiles with specialization, subject area, availability, and description.
@@ -26,7 +26,7 @@ Provide a digital environment that:
 - **Login and Authentication System**
   - Secure access to user dashboards and features.
 
-## 🛠️ Tech Stack
+## Tech Stack
 
 - **Backend:** Django (Python)
 - **Frontend:** Django Templates
@@ -34,7 +34,7 @@ Provide a digital environment that:
 - **Dev Environment:** GitHub Codespaces
 
 
-## 📁 Project Structure (simplified)
+## Project Structure (simplified)
 
 ```
 webknowledge/
@@ -48,7 +48,7 @@ webknowledge/
 └── requirements.txt
 ```
 
-## 🚀 Running the Project Locally
+## Running the Project Locally
 
 ```bash
 git clone https://github.com/your-username/webknowledge.git
