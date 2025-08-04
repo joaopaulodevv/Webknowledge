@@ -33,21 +33,6 @@ Provide a digital environment that:
 - **Database:** SQLite (for development), PostgreSQL (planned support)
 - **Dev Environment:** GitHub Codespaces
 
-
-## Project Structure (simplified)
-
-```
-webknowledge/
-├── accounts/           # Authentication and user profiles
-├── chat/               # Messaging system
-├── core/               # Core logic and student homepage
-├── professors/         # Teacher registration and listings
-├── templates/          # HTML templates by user type
-├── static/             # Static files (CSS, JS, images)
-├── manage.py
-└── requirements.txt
-```
-
 ## Running the Project Locally
 
 ```bash
